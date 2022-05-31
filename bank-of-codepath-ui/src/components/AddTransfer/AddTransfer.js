@@ -1,30 +1,27 @@
-import "./AddTransaction.css";
+import "./AddTransfer.css";
 import axios from "axios";
 
-export default function AddTransaction({ setTransactions }) {
+export default function addTransfer({ setTransfers }) {
   async function add() {
-    let category = document.getElementById("category").value;
-    let amount = document.getElementById("amount").value;
-    let description = document.getElementById("description").value;
+    let recipient = document.getElementById("recipient").value;
+    let amount = document.getElementById("transferAmount").value;
+    let memo = document.getElementById("memo").value;
     let data = {
-      transaction: {
-        category: category,
+      transfer: {
+        recipientEmail: recipient,
         amount: amount,
-        description: description,
+        memo: memo,
       },
     };
     let callback = await axios.post(
-      "http://localhost:3001/bank/transactions",
+      "http://localhost:3001/bank/transfers",
       data
     );
 
-    setTransactions((transactions) => [
-      ...transactions,
-      callback.data.transaction,
-    ]);
-    document.getElementById("category").value = "";
+    setTransfers((transfers) => [...transfers, callback.data.transfer]);
+    document.getElementById("recipient").value = "";
     document.getElementById("amount").value = "";
-    document.getElementById("description").value = "";
+    document.getElementById("memo").value = "";
   }
   return (
     <div className="AddTransaction">
@@ -33,26 +30,26 @@ export default function AddTransaction({ setTransactions }) {
       <div className="form">
         <div className="fields">
           <div className="field">
-            <label>Description</label>
+            <label>Memo</label>
             <input
-              id="description"
+              id="memo"
               type="text"
               name="description"
-              placeholder="Enter a description..."
+              placeholder="Enter a memo..."
             />
           </div>
           <div className="field">
-            <label>Category</label>
+            <label>Recipient</label>
             <input
-              id="category"
+              id="recipient"
               type="text"
               name="category"
-              placeholder="Enter a category..."
+              placeholder="Enter a recipient..."
             />
           </div>
           <div className="field" style={{ flex: 0.5 }}>
             <label>Amount (cents)</label>
-            <input id="amount" type="number" name="amount" />
+            <input id="transferAmount" type="number" name="amount" />
           </div>
 
           <button className="btn add-transaction" type="submit" onClick={add}>

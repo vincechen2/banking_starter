@@ -14,6 +14,9 @@
   max-width: 150px;
 }
 .Navbar .search {
+  flex: 3;
+}
+.Navbar .total {
   flex: 1;
 }
 .Navbar .user {
