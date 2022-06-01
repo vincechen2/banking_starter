@@ -64,6 +64,8 @@ export default function App() {
         <Navbar
           allTransactions={allTransactions}
           setTransactions={setTransactions}
+          allTransfers={allTransfers}
+          setTransfers={setTransfers}
         />
         <TransactionDetail />
       </div>
@@ -73,6 +75,8 @@ export default function App() {
         <Navbar
           allTransactions={allTransactions}
           setTransactions={setTransactions}
+          allTransfers={allTransfers}
+          setTransfers={setTransfers}
         />
         <TransferDetail />
       </div>
